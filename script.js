@@ -1,35 +1,101 @@
 function display(id, status) {
   document.getElementById(id).style.display = status;
 }
+function dText(id, txt) {
+  document.getElementById(id).innerHTML = txt;
+}
 function openPopup() {
   display('popup', 'block');
 }
 function closePopup() {
   display('popup', 'none');
 }
-
-var word = '',
-  wordGuess = [],
-  wrongGuess = [],
-  guessBomb = 0,
-  winCount = 1,
-  guess = '',
+function mainDeclare() {
+  word = '';
+  wordGuess = [];
+  wrongGuess = [];
+  guessBomb = 0;
+  winCount = 1;
+  guess = '';
   dif = 0;
-function chooseDif1() {
-  dif = 1;
-  afterChoose();
 }
-function chooseDif2() {
-  dif = 2;
-  afterChoose();
+mainDeclare();
+totalWin = 0;
+function winCountFunc() {
+  var num = 0,
+    lettUsed = '',
+    count = word.length;
+  while (count > 0) {
+    count--;
+    if (lettUsed.includes(word[count])) {
+    } else {
+      num++;
+      lettUsed += word[count];
+    }
+  }
+  return num;
 }
-function chooseDif3() {
-  dif = 3;
-  afterChoose();
+function guessing() {
+  dText('rightGuess', 'word progress: ' + wordGuess);
+  dText('wrongGuess', 'Wrong guesses: ' + wrongGuess);
+  dText('guessesLeft', 'Guesses remaining: ' + guessBomb);
 }
-function afterChoose() {
-  display('startButton', 'block');
+function start(d) {
   display('chooseDifficulty', 'none');
+  display('mainGame', 'block');
+  display('RRguess', 'block');
+  word = wordw();
+  winCount = winCountFunc();
+  guessBomb = word.length * d;
+  for (i = 0; i < word.length; i++) wordGuess.push(' _ ');
+  guessing();
+  console.log(word);
+}
+function enterGuess() {
+  let lett = document.getElementById('guess').value;
+  document.getElementById('guess').value = '';
+  if (lett.length === 1) {
+    if (word.includes(lett) == true) NewCW(lett);
+    else if (!wrongGuess.includes(lett)) {
+      wrongGuess.push(lett);
+      guessBomb--;
+    }
+  } else if (lett.length < 1) {
+  } else guessBomb--;
+  if (guessBomb <= 0) gameLose();
+  if (winCount <= 0) gameWin();
+  guessing();
+}
+function NewCW(letter) {
+  var count = 0;
+  winCount--;
+  while (count <= word.length - 1)
+    if (letter === word[count]) {
+      wordGuess[count] = letter;
+      count++;
+    } else count++;
+}
+function gameEnd() {
+  display('mainGame', 'none');
+  display('RRguess', 'none');
+  dText('win', `Win count: ${totalWin}`);
+}
+function gameLose() {
+  gameEnd();
+  display('youLose', 'block');
+  dText('correctWordWas', 'The correct word was ' + word);
+}
+function gameWin() {
+  totalWin++;
+  gameEnd();
+  display('youWin', 'block');
+}
+function restart() {
+  gameEnd();
+  display('youLose', 'none');
+  display('youWin', 'none');
+  display('chooseDifficulty', 'block');
+  mainDeclare();
 }
 function wordw() {
   var randomWords = [
@@ -230,101 +296,5 @@ function wordw() {
     'veil',
     'coal',
   ];
-  return randomWords[Math.floor(Math.random() * 70)];
-}
-function wordStart() {
-  for (i = 0; i < word.length; i++) wordGuess.push(' _ ');
-}
-function winCountFunc() {
-  var num = 0,
-    lettUsed = '',
-    count = word.length;
-  while (count > 0) {
-    if (lettUsed.includes(word[count - 1])) {
-    } else {
-      num++;
-      lettUsed += word[count - 1];
-    }
-    count--;
-  }
-  return num;
-}
-function start() {
-  word = wordw();
-  winCount = winCountFunc();
-  if (dif == 1) guessBomb = word.length + 5;
-  else if (dif == 2) guessBomb = word.length;
-  else if (dif == 3) {
-    if (word.length % 2 == 0) guessBomb = word.length / 2;
-    else guessBomb = (word.length - 1) / 2;
-  }
-  console.log(word);
-  display('mainGame', 'block');
-  display('startButton', 'none');
-  document.getElementById('question').innerHTML = 'Enter your first guess';
-  wordStart();
-  display('RRguess', 'block');
-  document.getElementById('rightGuess').innerHTML =
-    'word progress: ' + wordGuess;
-  document.getElementById('wrongGuess').innerHTML =
-    'Wrong guesses: ' + wrongGuess;
-  document.getElementById('guessesLeft').innerHTML =
-    'Guesses remaining: ' + guessBomb;
-}
-function enterGuess() {
-  var lett = document.getElementById('guess').value;
-  document.getElementById('guess').value = '';
-  if (lett.length === 1) {
-    if (word.includes(lett) == true) NewCW(lett);
-    else if (!wrongGuess.includes(lett)) {
-      console.log('hi');
-      wrongGuess.push(lett);
-      guessBomb -= 1;
-    }
-  } else if (lett.length < 1) {
-  } else guessBomb -= 1;
-  if (guessBomb <= 0) gameLose();
-  if (winCount <= 0) gameWin();
-  document.getElementById('rightGuess').innerHTML =
-    'word progress: ' + wordGuess;
-  document.getElementById('wrongGuess').innerHTML =
-    'Wrong guesses: ' + wrongGuess;
-  document.getElementById('guessesLeft').innerHTML =
-    'Guesses remaining: ' + guessBomb;
-}
-function NewCW(letter) {
-  var count = 0;
-  winCount -= 1;
-  while (count <= word.length - 1)
-    if (letter === word[count]) {
-      wordGuess[count] = letter;
-      count += 1;
-    } else count += 1;
-}
-function gameEnd() {
-  display('mainGame', 'none');
-  display('RRguess', 'none');
-}
-function gameLose() {
-  gameEnd();
-  display('youLose', 'block');
-  document.getElementById('correctWordWas').innerHTML =
-    'The correct word was ' + word;
-}
-function gameWin() {
-  gameEnd();
-  display('youWin', 'block');
-}
-function restart() {
-  gameEnd();
-  display('youLose', 'none');
-  display('youWin', 'none');
-  display('chooseDifficulty', 'block');
-  word = '';
-  wordGuess = [];
-  wrongGuess = [];
-  guessBomb = 0;
-  winCount = 1;
-  guess = '';
-  dif = 0;
+  return randomWords[Math.floor(Math.random() * randomWords.length)];
 }
