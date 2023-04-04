@@ -1,29 +1,25 @@
-var word = '';
-var wordGuess = [];
-var wrongGuess = [];
-var guessBomb = 0;
-var winCount = 1;
-var guess = '';
-var dif = 0;
-
+var word = '',
+  wordGuess = [],
+  wrongGuess = [],
+  guessBomb = 0,
+  winCount = 1,
+  guess = '',
+  dif = 0;
 function chooseDif1() {
   dif = 1;
   document.getElementById('startButton').style.display = 'block';
   document.getElementById('chooseDifficulty').style.display = 'none';
 }
-
 function chooseDif2() {
   dif = 2;
   document.getElementById('startButton').style.display = 'block';
   document.getElementById('chooseDifficulty').style.display = 'none';
 }
-
 function chooseDif3() {
   dif = 3;
   document.getElementById('startButton').style.display = 'block';
   document.getElementById('chooseDifficulty').style.display = 'none';
 }
-
 function wordw() {
   var randomWords = [
     'humor',
@@ -42,7 +38,6 @@ function wordw() {
     'pretty',
     'grin',
     'capricious',
-    'bite-sized',
     'misty',
     'ignore',
     'certain',
@@ -86,7 +81,6 @@ function wordw() {
     'toe',
     'flow',
     'competition',
-    'ill-fated',
     'oatmeal',
     'match',
     'male',
@@ -154,7 +148,6 @@ function wordw() {
     'hospitable',
     'dust',
     'naughty',
-    'extra-large',
     'tacky',
     'produce',
     'committee',
@@ -173,7 +166,6 @@ function wordw() {
     'statement',
     'sulky',
     'spell',
-    'x-ray',
     'square',
     'taste',
     'great',
@@ -230,11 +222,7 @@ function wordw() {
   return randomWords[Math.floor(Math.random() * 70)];
 }
 function wordStart() {
-  var count = word.length;
-  while (count > 0) {
-    wordGuess.push(' _ ');
-    count -= 1;
-  }
+  for (i = 0; i < word.length; i++) wordGuess.push(' _ ');
 }
 function winCountFunc() {
   var num = 0;
@@ -284,13 +272,8 @@ function enterGuess() {
     }
   } else if (lett.length < 1) {
   } else guessBomb -= 1;
-
-  if (guessBomb <= 0) {
-    gameLose();
-  }
-  if (winCount <= 0) {
-    gameWin();
-  }
+  if (guessBomb <= 0) gameLose();
+  if (winCount <= 0) gameWin();
   document.getElementById('rightGuess').innerHTML =
     'word progress: ' + wordGuess;
   document.getElementById('wrongGuess').innerHTML =
