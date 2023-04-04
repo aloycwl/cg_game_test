@@ -1,11 +1,11 @@
-function openPopup() {
-  document.getElementById('popup').style.display = 'block';
-}
-function closePopup() {
-  document.getElementById('popup').style.display = 'none';
-}
 function display(id, status) {
   document.getElementById(id).style.display = status;
+}
+function openPopup() {
+  display('popup', 'block');
+}
+function closePopup() {
+  display('popup', 'none');
 }
 
 var word = '',
@@ -317,9 +317,9 @@ function gameWin() {
 }
 function restart() {
   gameEnd();
-  document.getElementById('youLose').style.display = 'none';
-  document.getElementById('youWin').style.display = 'none';
-  document.getElementById('chooseDifficulty').style.display = 'block';
+  display('youLose', 'none');
+  display('youWin', 'none');
+  display('chooseDifficulty', 'block');
   word = '';
   wordGuess = [];
   wrongGuess = [];
