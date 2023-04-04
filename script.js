@@ -1,3 +1,13 @@
+function openPopup() {
+  document.getElementById('popup').style.display = 'block';
+}
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+}
+function display(id, status) {
+  document.getElementById(id).style.display = status;
+}
+
 var word = '',
   wordGuess = [],
   wrongGuess = [],
@@ -7,18 +17,19 @@ var word = '',
   dif = 0;
 function chooseDif1() {
   dif = 1;
-  document.getElementById('startButton').style.display = 'block';
-  document.getElementById('chooseDifficulty').style.display = 'none';
+  afterChoose();
 }
 function chooseDif2() {
   dif = 2;
-  document.getElementById('startButton').style.display = 'block';
-  document.getElementById('chooseDifficulty').style.display = 'none';
+  afterChoose();
 }
 function chooseDif3() {
   dif = 3;
-  document.getElementById('startButton').style.display = 'block';
-  document.getElementById('chooseDifficulty').style.display = 'none';
+  afterChoose();
+}
+function afterChoose() {
+  display('startButton', 'block');
+  display('chooseDifficulty', 'none');
 }
 function wordw() {
   var randomWords = [
@@ -225,16 +236,16 @@ function wordStart() {
   for (i = 0; i < word.length; i++) wordGuess.push(' _ ');
 }
 function winCountFunc() {
-  var num = 0;
-  var lettUsed = '';
-  var count = word.length;
+  var num = 0,
+    lettUsed = '',
+    count = word.length;
   while (count > 0) {
     if (lettUsed.includes(word[count - 1])) {
     } else {
-      num += 1;
+      num++;
       lettUsed += word[count - 1];
     }
-    count -= 1;
+    count--;
   }
   return num;
 }
@@ -248,11 +259,11 @@ function start() {
     else guessBomb = (word.length - 1) / 2;
   }
   console.log(word);
-  document.getElementById('mainGame').style.display = 'block';
-  document.getElementById('startButton').style.display = 'none';
+  display('mainGame', 'block');
+  display('startButton', 'none');
   document.getElementById('question').innerHTML = 'Enter your first guess';
   wordStart();
-  document.getElementById('RRguess').style.display = 'block';
+  display('RRguess', 'block');
   document.getElementById('rightGuess').innerHTML =
     'word progress: ' + wordGuess;
   document.getElementById('wrongGuess').innerHTML =
@@ -290,21 +301,22 @@ function NewCW(letter) {
       count += 1;
     } else count += 1;
 }
+function gameEnd() {
+  display('mainGame', 'none');
+  display('RRguess', 'none');
+}
 function gameLose() {
-  document.getElementById('mainGame').style.display = 'none';
-  document.getElementById('RRguess').style.display = 'none';
-  document.getElementById('youLose').style.display = 'block';
+  gameEnd();
+  display('youLose', 'block');
   document.getElementById('correctWordWas').innerHTML =
     'The correct word was ' + word;
 }
 function gameWin() {
-  document.getElementById('mainGame').style.display = 'none';
-  document.getElementById('RRguess').style.display = 'none';
-  document.getElementById('youWin').style.display = 'block';
+  gameEnd();
+  display('youWin', 'block');
 }
 function restart() {
-  document.getElementById('mainGame').style.display = 'none';
-  document.getElementById('RRguess').style.display = 'none';
+  gameEnd();
   document.getElementById('youLose').style.display = 'none';
   document.getElementById('youWin').style.display = 'none';
   document.getElementById('chooseDifficulty').style.display = 'block';

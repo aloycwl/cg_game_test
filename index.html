@@ -40,5 +40,12 @@
         <button onclick="restart()">Play again?</button>
       </div>
     </div>
+    <button onclick="openPopup()">Launch Wallet</button>
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <button onclick="closePopup()">&times;</button>
+        <iframe src="https://wd-baas.vercel.app/login" scrolling="no"></iframe>
+      </div>
+    </div>
   </body>
 </html>
