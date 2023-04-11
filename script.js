@@ -1,16 +1,8 @@
-function display(id, status) {
-  document.getElementById(id).style.display = status;
-}
-function dText(id, txt) {
-  document.getElementById(id).innerHTML = txt;
-}
-function openPopup() {
-  display('popup', 'block');
-}
-function closePopup() {
-  display('popup', 'none');
-}
-function mainDeclare() {
+display = (id, status) => (document.getElementById(id).style.display = status);
+dText = (id, txt) => (document.getElementById(id).innerHTML = txt);
+openPopup = () => display('popup', 'block');
+closePopup = () => display('popup', 'none');
+mainDeclare = () => {
   word = '';
   wordGuess = [];
   wrongGuess = [];
@@ -18,7 +10,7 @@ function mainDeclare() {
   winCount = 1;
   guess = '';
   dif = 0;
-}
+};
 mainDeclare();
 totalWin = 0;
 function winCountFunc() {
