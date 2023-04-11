@@ -61,11 +61,10 @@ enterGuess = () => {
 NewCW = (letter) => {
   var count = 0;
   winCount--;
-  while (count <= word.length - 1)
-    if (letter === word[count]) {
-      wordGuess[count] = letter;
-      count++;
-    } else count++;
+  while (count <= word.length - 1) {
+    if (letter === word[count]) wordGuess[count] = letter;
+    count++;
+  }
 };
 gameEnd = () => {
   display('mainGame', 'none');
