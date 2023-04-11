@@ -78,12 +78,12 @@ function NewCW(letter) {
 function gameEnd() {
   display('mainGame', 'none');
   display('RRguess', 'none');
-  dText('win', `Win count: ${totalWin}`);
+  dText('win', `总得分：${totalWin}`);
 }
 function gameLose() {
   gameEnd();
   display('youLose', 'block');
-  dText('correctWordWas', 'The correct word was ' + word);
+  dText('correctWordWas', '正确字母为：' + word);
 }
 function gameWin() {
   totalWin++;
