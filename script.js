@@ -28,9 +28,9 @@ winCountFunc = () => {
   return num;
 };
 guessing = () => {
-  dText('rightGuess', 'word progress: ' + wordGuess);
-  dText('wrongGuess', 'Wrong guesses: ' + wrongGuess);
-  dText('guessesLeft', 'Guesses remaining: ' + guessBomb);
+  dText('rightGuess', '猜想：' + wordGuess);
+  dText('wrongGuess', '错字母：' + wrongGuess);
+  dText('guessesLeft', '机会：' + guessBomb);
 };
 start = (d) => {
   display('chooseDifficulty', 'none');
