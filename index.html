@@ -1,22 +1,19 @@
 <html>
   <head>
+    <meta charset="utf-16" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
   </head>
   <body>
     <div id="chooseDifficulty" style="display: block">
-      <h1>Guess a Word</h1>
-      <h5>Choose a difficulty</h5>
-      <button title="very easy" onclick="start(3)">easy</button>
-      <button title="not difficult" onclick="start(2)">normal</button>
-      <button title="a challenge" onclick="start(1)">hard</button>
+      <h5>选难度级别</h5>
+      <button onclick="start(3)">超容易</button>
+      <button onclick="start(2)">普通</button>
+      <button onclick="start(1)">不是人</button>
     </div>
     <div id="mainGame" style="display: none">
-      <p id="question">Enter your first guess</p>
-      <input type="text" id="guess" maxlength="1" />
-      <div>
-        <button onclick="enterGuess()">Enter Guess</button>
-      </div>
+      <p id="question">输入英文字母：</p>
+      <input id="guess" maxlength="1" size="1" onkeyup="enterGuess()" />
     </div>
     <div id="RRguess" style="display: block">
       <p id="rightGuess"></p>
@@ -24,20 +21,14 @@
       <p id="guessesLeft"></p>
     </div>
     <div id="youLose" style="display: none">
-      <h1>You Lose</h1>
-      <div>
-        <button onclick="restart()">Play again?</button>
-      </div>
+      <button onclick="restart()">输了， 再玩？</button>
       <p id="correctWordWas"></p>
     </div>
     <div id="youWin" style="display: none">
-      <h2>You Win</h2>
-      <div>
-        <button onclick="restart()">Play again?</button>
-      </div>
+      <button onclick="restart()">赢了。再玩？</button>
     </div>
     <br /><br />
-    <button onclick="openPopup()">Launch Wallet</button> <a id="win"></a>
+    <button onclick="openPopup()">启动钱包</button> <a id="win"></a>
     <div id="popup" class="popup">
       <div class="popup-content">
         <button onclick="closePopup()">&times;</button>
