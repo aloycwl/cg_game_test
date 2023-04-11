@@ -13,7 +13,7 @@ mainDeclare = () => {
 };
 mainDeclare();
 totalWin = 0;
-function winCountFunc() {
+winCountFunc = () => {
   var num = 0,
     lettUsed = '',
     count = word.length;
@@ -26,13 +26,13 @@ function winCountFunc() {
     }
   }
   return num;
-}
-function guessing() {
+};
+guessing = () => {
   dText('rightGuess', 'word progress: ' + wordGuess);
   dText('wrongGuess', 'Wrong guesses: ' + wrongGuess);
   dText('guessesLeft', 'Guesses remaining: ' + guessBomb);
-}
-function start(d) {
+};
+start = (d) => {
   display('chooseDifficulty', 'none');
   display('mainGame', 'block');
   display('RRguess', 'block');
@@ -42,8 +42,8 @@ function start(d) {
   for (i = 0; i < word.length; i++) wordGuess.push(' _ ');
   guessing();
   console.log(word);
-}
-function enterGuess() {
+};
+enterGuess = () => {
   let lett = document.getElementById('guess').value;
   document.getElementById('guess').value = '';
   if (lett.length === 1) {
@@ -57,8 +57,8 @@ function enterGuess() {
   if (guessBomb <= 0) gameLose();
   if (winCount <= 0) gameWin();
   guessing();
-}
-function NewCW(letter) {
+};
+NewCW = (letter) => {
   var count = 0;
   winCount--;
   while (count <= word.length - 1)
@@ -66,30 +66,30 @@ function NewCW(letter) {
       wordGuess[count] = letter;
       count++;
     } else count++;
-}
-function gameEnd() {
+};
+gameEnd = () => {
   display('mainGame', 'none');
   display('RRguess', 'none');
   dText('win', `总得分：${totalWin}`);
-}
-function gameLose() {
+};
+gameLose = () => {
   gameEnd();
   display('youLose', 'block');
   dText('correctWordWas', '正确字母为：' + word);
-}
-function gameWin() {
+};
+gameWin = () => {
   totalWin++;
   gameEnd();
   display('youWin', 'block');
-}
-function restart() {
+};
+restart = () => {
   gameEnd();
   display('youLose', 'none');
   display('youWin', 'none');
   display('chooseDifficulty', 'block');
   mainDeclare();
-}
-function wordw() {
+};
+wordw = () => {
   var randomWords = [
     'humor',
     'miniature',
@@ -289,4 +289,4 @@ function wordw() {
     'coal',
   ];
   return randomWords[Math.floor(Math.random() * randomWords.length)];
-}
+};
