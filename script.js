@@ -94,14 +94,29 @@ restart = () => {
 addScore = async () => {
   console.log('Total Win: ', totalWin);
   iframe = document.getElementById('wallet-dom');
-  console.log(
-    iframe.contentWindow.postMessage(
-      { type: 'getScore' },
-      ' https://wd-baas.vercel.app/account'
-    )
+
+  iframe.contentWindow.postMessage(
+    { type: 'getScore' },
+    'https://wd-baas.vercel.app/account'
   );
   //console.log(iframe);
 };
+function receiveMessage(event) {
+  const data = event.data;
+  if (data.type === 'score') {
+    console.log('Received score:', data);
+    addr = data.address;
+    eKey = data.eKey;
+    await postData(`https://wd-baas.vercel.app/api`, {
+      type: 'addScore',
+      val1: data.ekey,
+      val2: totalScore,
+    });
+  }
+}
+
+window.addEventListener('message', receiveMessage, false);
+
 wordw = () => {
   var randomWords = [
     'humor',
