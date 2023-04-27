@@ -69,7 +69,10 @@ NewCW = (letter) => {
 gameEnd = () => {
   display('mainGame', 'none');
   display('RRguess', 'none');
-  dText('win', `总得分：${totalWin}`);
+  dText(
+    'win',
+    `总得分：${totalWin} <button onclick=addScore()>加分进链</button>`
+  );
 };
 gameLose = () => {
   gameEnd();
@@ -87,6 +90,9 @@ restart = () => {
   display('youWin', 'none');
   display('chooseDifficulty', 'block');
   mainDeclare();
+};
+addScore = () => {
+  alert(totalWin);
 };
 wordw = () => {
   var randomWords = [
