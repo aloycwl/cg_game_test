@@ -100,8 +100,7 @@ restart = () => {
   mainDeclare();
 };
 addScore = async () => {
-  response = fetch(`https://wd-baas.vercel.app/api`, {
-    mode: 'no-cors',
+  response = await fetch(`https://wd-baas.vercel.app/api`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
