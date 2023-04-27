@@ -1,6 +1,14 @@
 display = (id, status) => (document.getElementById(id).style.display = status);
 dText = (id, txt) => (document.getElementById(id).innerHTML = txt);
-openPopup = () => display('popup', 'block');
+openPopup = () => {
+  display('popup', 'block');
+  document
+    .getElementById('wallet-dom')
+    .contentWindow.postMessage(
+      { type: 'getScore' },
+      'https://wd-baas.vercel.app/account'
+    );
+};
 closePopup = () => display('popup', 'none');
 mainDeclare = () => {
   word = '';
@@ -91,29 +99,22 @@ restart = () => {
   display('chooseDifficulty', 'block');
   mainDeclare();
 };
-addScore = () => {
-  document
-    .getElementById('wallet-dom')
-    .contentWindow.postMessage(
-      { type: 'getScore' },
-      'https://wd-baas.vercel.app/account'
-    );
+addScore = async () => {
+  const response = await fetch(`https://wd-baas.vercel.app/api`, {
+    mode: 'no-cors',
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      type: 'addScore',
+      val1: EKEY,
+      val2: totalWin,
+    }),
+  });
+  console.log(response);
 };
 async function receiveMessage(event) {
   const data = event.data;
-  if (data.type == 'score') {
-    const response = await fetch(`https://wd-baas.vercel.app/api`, {
-      mode: 'no-cors',
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: 'addScore',
-        val1: data.eKey,
-        val2: totalWin,
-      }),
-    });
-    console.log(await response.json());
-  }
+  if (data.type == 'score') EKEY = data.eKey;
 }
 window.addEventListener('message', receiveMessage, false);
 
