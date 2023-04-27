@@ -99,26 +99,12 @@ addScore = async () => {
       'https://wd-baas.vercel.app/account'
     );
 };
-function postData(url = '', data = {}) {
-  return fetch(url, {
-    mode: 'cors',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .catch((error) => {
-      throw error;
-    });
-}
 async function receiveMessage(event) {
   const data = event.data;
   if (data.type === 'score') {
     console.log(data.ekey, totalWin);
     fetch(`https://wd-baas.vercel.app/api`, {
-      mode: 'cors',
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
