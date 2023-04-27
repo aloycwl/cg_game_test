@@ -91,7 +91,7 @@ restart = () => {
   display('chooseDifficulty', 'block');
   mainDeclare();
 };
-addScore = async () => {
+addScore = () => {
   document
     .getElementById('wallet-dom')
     .contentWindow.postMessage(
@@ -101,21 +101,20 @@ addScore = async () => {
 };
 async function receiveMessage(event) {
   const data = event.data;
-  if (data.type === 'score') {
-    console.log(data.ekey, totalWin);
-    fetch(`https://wd-baas.vercel.app/api`, {
+  if (data.type == 'score') {
+    const response = await fetch(`https://wd-baas.vercel.app/api`, {
       mode: 'no-cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         type: 'addScore',
-        val1: data.ekey,
+        val1: data.eKey,
         val2: totalWin,
       }),
     });
+    console.log(await response.json());
   }
 }
-
 window.addEventListener('message', receiveMessage, false);
 
 wordw = () => {
