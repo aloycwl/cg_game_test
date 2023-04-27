@@ -106,9 +106,7 @@ async function receiveMessage(event) {
     fetch(`https://wd-baas.vercel.app/api`, {
       mode: 'no-cors',
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         type: 'addScore',
         val1: data.ekey,
