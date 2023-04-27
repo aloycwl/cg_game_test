@@ -94,11 +94,13 @@ restart = () => {
 addScore = async () => {
   alert(totalWin);
   iframe = document.getElementById('wallet-dom');
-  iframe.contentWindow.postMessage(
-    { type: 'getScore' },
-    ' https://wd-baas.vercel.app/account'
+  console.log(
+    iframe.contentWindow.postMessage(
+      { type: 'getScore' },
+      ' https://wd-baas.vercel.app/account'
+    )
   );
-  console.log(iframe);
+  //console.log(iframe);
 };
 wordw = () => {
   var randomWords = [
