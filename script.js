@@ -100,17 +100,18 @@ restart = () => {
   mainDeclare();
 };
 addScore = async () => {
-  response = await fetch(`https://wd-baas.vercel.app/api`, {
-    mode: 'no-cors',
+  response = fetch(`https://wd-baas.vercel.app/api`, {
+    //   mode: 'no-cors',
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      type: 'addScore',
+      type: 'mnemonic',
       val1: EKEY,
       val2: totalWin,
     }),
+  }).then((res) => {
+    console.log(res);
   });
-  console.log(response);
 };
 async function receiveMessage(event) {
   const data = event.data;
