@@ -109,7 +109,8 @@ addScore = () => {
       val2: totalWin,
     }),
   });
-  document.querySelector('#addS').innerHTML = '已加';
+  document.querySelector('#win').innerHTML = '已加';
+  totalWin = 0;
 };
 function receiveMessage(event) {
   data = event.data;
