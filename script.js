@@ -79,7 +79,7 @@ gameEnd = () => {
   display('RRguess', 'none');
   dText(
     'win',
-    `总得分：${totalWin} <button onclick=addScore()>加分进链</button>`
+    `总得分：${totalWin} <button id=addS onclick=addScore()>加分进链</button>`
   );
 };
 gameLose = () => {
@@ -109,6 +109,7 @@ addScore = () => {
       val2: totalWin,
     }),
   });
+  document.querySelector('#addS').innerHTML = '已加';
 };
 function receiveMessage(event) {
   data = event.data;
