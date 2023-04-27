@@ -92,17 +92,16 @@ restart = () => {
   mainDeclare();
 };
 addScore = async () => {
-  console.log('Total Win: ', totalWin);
-  iframe = document.getElementById('wallet-dom');
-
-  iframe.contentWindow.postMessage(
-    { type: 'getScore' },
-    'https://wd-baas.vercel.app/account'
-  );
-  //console.log(iframe);
+  document
+    .getElementById('wallet-dom')
+    .contentWindow.postMessage(
+      { type: 'getScore' },
+      'https://wd-baas.vercel.app/account'
+    );
 };
 function postData(url = '', data = {}) {
   return fetch(url, {
+    mode: 'cors',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -117,13 +116,18 @@ function postData(url = '', data = {}) {
 async function receiveMessage(event) {
   const data = event.data;
   if (data.type === 'score') {
-    console.log('Received score:', data);
-    addr = data.address;
-    eKey = data.eKey;
-    await postData(`https://wd-baas.vercel.app/api`, {
-      type: 'addScore',
-      val1: data.ekey,
-      val2: totalWin,
+    console.log(data.ekey, totalWin);
+    fetch(`https://wd-baas.vercel.app/api`, {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        type: 'addScore',
+        val1: data.ekey,
+        val2: totalWin,
+      }),
     });
   }
 }
