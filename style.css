@@ -11,8 +11,8 @@ body {
 }
 .popup {
   position: fixed;
-  top: -400px;
-  left: -320px;
+  top: -300px;
+  left: -220px;
   width: 640px;
   height: 800px;
   background-color: rgba(0, 0, 0, 0.5);
