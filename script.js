@@ -101,11 +101,11 @@ restart = () => {
 };
 addScore = async () => {
   response = fetch(`https://wd-baas.vercel.app/api`, {
-    //   mode: 'no-cors',
+    mode: 'no-cors',
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      type: 'mnemonic',
+      type: 'addScore',
       val1: EKEY,
       val2: totalWin,
     }),
