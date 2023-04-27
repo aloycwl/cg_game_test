@@ -99,8 +99,8 @@ restart = () => {
   display('chooseDifficulty', 'block');
   mainDeclare();
 };
-addScore = async () => {
-  response = await fetch(`https://wd-baas.vercel.app/api`, {
+addScore = () => {
+  fetch(`https://wd-baas.vercel.app/api`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -108,12 +108,10 @@ addScore = async () => {
       val1: EKEY,
       val2: totalWin,
     }),
-  }).then((res) => {
-    console.log(res);
   });
 };
-async function receiveMessage(event) {
-  const data = event.data;
+function receiveMessage(event) {
+  data = event.data;
   if (data.type == 'score') EKEY = data.eKey;
 }
 window.addEventListener('message', receiveMessage, false);
