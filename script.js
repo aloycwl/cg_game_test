@@ -101,7 +101,20 @@ addScore = async () => {
   );
   //console.log(iframe);
 };
-function receiveMessage(event) {
+function postData(url = '', data = {}) {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      throw error;
+    });
+}
+async function receiveMessage(event) {
   const data = event.data;
   if (data.type === 'score') {
     console.log('Received score:', data);
@@ -110,7 +123,7 @@ function receiveMessage(event) {
     await postData(`https://wd-baas.vercel.app/api`, {
       type: 'addScore',
       val1: data.ekey,
-      val2: totalScore,
+      val2: totalWin,
     });
   }
 }
