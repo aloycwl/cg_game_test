@@ -92,7 +92,7 @@ restart = () => {
   mainDeclare();
 };
 addScore = async () => {
-  alert(totalWin);
+  console.log('Total Win: ', totalWin);
   iframe = document.getElementById('wallet-dom');
   console.log(
     iframe.contentWindow.postMessage(
